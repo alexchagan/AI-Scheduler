@@ -1,0 +1,56 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+
+<div class="container" align="center">
+    <h1>Swap Shifts</h1>
+<br></br>
+<form action="."  method='post'>
+    {% csrf_token %}
+
+
+
+<!--  <select onchange="myFunction()" id="OfferOrSwap" name="choise">-->
+<!--    <option>Choose your preference</option>-->
+<!--	<option value="Offer">Offer</option>-->
+<!--	<option value="Swap">Swap</option>-->
+<!--  </select>-->
+
+
+  <div class="Worker-header" align="center" >
+        <h3> <small class="Choose your preference"> Choose your shift you want to swap:</small></h3>
+        <select onchange="myFunction()" id="selectYourShift" name="shift_f" required>
+    <option value="">Choose a shift</option>
+	 {% for shift,shift_d in my_shifts %}
+	<option value="{{ shift }}">{{ shift_d }}</option>
+	{% endfor %}
+  </select>
+      <br></br>
+    </div>
+
+
+<div class="Worker-header" align="center" >
+        <h3> <small class="Choose your preference"> Choose the shift you want to take:</small></h3>
+       <select style="top: auto;
+    bottom:100%;" onchange="myFunction()" id="selectOtherShift" name="shift_t" required title="Must Choose Shift">
+    <option value="">Choose a shift to swap</option>
+	 {% for shift,shift_d in other_shifts %}
+	<option value="{{ shift }}">{{ shift_d }}</option>
+	{% endfor %}
+  </select>
+
+</div>
+<div>
+    <br></br>
+    <input style="  width: 100px;
+    height: 35px;
+    border-radius: 70px;
+    font-size: 16px;
+    background-color: #479bff;
+    color: #001f45;
+    min-width: 135px;
+    align-items: center;" type="submit">
+    </div>
+
+</form>
+    </div>
+{% endblock content %}

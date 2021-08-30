@@ -1,0 +1,52 @@
+{% extends "Shifts/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1> Select Shifts <small class="instructions"></h1>
+    </div>
+</div>
+
+
+<form id="shifts_to_send" name="shifts_to_send" method="post">
+    {% csrf_token %}
+<div class="container" align = 'center'>
+
+    <table class="table-responsive-down">
+    <tr>
+        {% for da in d %}
+            <th style="text-align: center;">{{ da.0 }}</th>
+        {% endfor %}
+</tr>
+        <tr>
+        {% for da in d %}
+            <th style="text-align: center;">{{ da.1 }}</th>
+        {% endfor %}
+	</tr>
+        {% for shift in shift_options_list %}
+        <tr>
+            {% for date in dates %}
+            <input type="checkbox" id="{{date}}{{shift}}" name="{{date}}{{shift}}" value="True" style="display:none">
+            <td><button class="btn" onclick="addItem(this); document.getElementById('{{date}}{{shift}}').checked=!document.getElementById('{{date}}{{shift}}').checked;" name="option" type="button" value="'{{date}}{{shift}}'" >{{ shift }}</button></td>
+            {% endfor %}
+            <input type="hidden" name="result" id="result" />
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <div>
+        <p class="instructions">Selected squares are turn <span class="markedGeen">GREEN</span></p>
+    </div>
+
+    <div style="background: #3b8beb">
+        <h4 style="font-family: Georgia, arial, serif;font-weight: bold;background: #3b8beb; color: white;">Suggested Shift For You:</h4>
+    <h5 style="font-family: Georgia, arial, serif;font-weight: bold;background: #3b8beb; color: white;"> {{ favorite_shifts }} </h5>
+    </div>
+
+</div>
+
+<div class="container-submit" align="center">
+    <button class="btn action-btn" type="button" id="submit_button" style="align-items: center; left: 20px;">Submit</button>
+</div>
+</form>
+{% endblock content %}
